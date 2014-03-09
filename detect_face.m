@@ -1,7 +1,7 @@
 % Author : Kemal Akkoyun
 % Institue : Istanbul Bilgi University
 % Id : 11076004
-% Description : A function to detect image in a file.
+% Description : A function to detect face in an image file.
 
 function [ face_image ] = detect_face(image)
     % Example:
