@@ -37,7 +37,7 @@ for i=1:number_of_images
         image_path = strcat(temp, picture_name);
         image = imread(image_path);
         % If you just want to extract face.
-        % image = detect_face(image);
+        image = detect_face(image);
         imshow(image)
         pause(1)
     end
