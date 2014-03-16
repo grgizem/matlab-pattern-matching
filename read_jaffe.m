@@ -1,8 +1,3 @@
-% Author : Elena Battini Sonmez
-% Institue : Istanbul Bilgi University
-% Description : A function to read through jaffe database.
-% NOTE: Code refactored by Kemal Akkoyun.
-
 function read_jaffe(db_path)
 
 % The database contains 213 images of 7 facial expressions (6 basic facial
@@ -27,7 +22,7 @@ function read_jaffe(db_path)
 % DATABASE DEPENDENT CONSTANTS
 subject_no = 10;
 emotion_no = 7;
-default_image_dim = 256;
+% default_image_dim = 256;
 
 % Directory that contains pictures.
 directory_of_pictures = dir(db_path);
@@ -57,54 +52,60 @@ for index=1:number_of_images
     if (strcmp(extension, 'tiff') == 1)
         emotion = char(emotion_with_number{1:1});
         emotion = emotion(1:2);
-        if(strcmp(emotion,'AN'))
-            emotion_code=4;
-        elseif(strcmp(emotion,'FE'))
-            emotion_code=1;
-        elseif(strcmp(emotion,'HA'))
-            emotion_code=2;
-        elseif(strcmp(emotion,'DI'))
-            emotion_code=3;
-        elseif(strcmp(emotion,'SA'))
-            emotion_code=5;
-        elseif(strcmp(emotion,'SU'))
-            emotion_code=6;
-        elseif(strcmp(emotion,'NE'))
-            emotion_code=7;
+        subject = char(subject);
+        switch emotion
+            case 'AN' 
+                emotion_code = 4;
+            case 'FE' 
+                emotion_code = 1;
+            case 'HA' 
+                emotion_code = 2;
+            case 'DI' 
+                emotion_code = 3; 
+            case 'SA' 
+                emotion_code = 5;
+            case 'SU' 
+                emotion_code = 6;
+            case 'NE' 
+                emotion_code = 7;
+%             otherwise
         end
-
-        if(strcmp(subject,'KA'))
-            subject_code=1;
-        elseif(strcmp(subject,'KL'))
-            subject_code=2;
-        elseif(strcmp(subject,'KM'))
-            subject_code=3;
-        elseif(strcmp(subject,'KR'))
-            subject_code=4;
-        elseif(strcmp(subject,'MK'))
-            subject_code=5;
-        elseif(strcmp(subject,'NA'))
-            subject_code=6;
-        elseif(strcmp(subject,'NM'))
-            subject_code=7;
-        elseif(strcmp(subject,'TM'))
-            subject_code=8;
-        elseif(strcmp(subject,'UY'))
-            subject_code=9;
-        elseif(strcmp(subject,'YM'))
-            subject_code=10;
+       
+        switch subject
+            case 'KA' 
+                subject_code = 1;
+            case 'KL' 
+                subject_code = 2;
+            case 'KM' 
+                subject_code = 3;
+            case 'KR' 
+                subject_code = 4;
+            case 'MK' 
+                subject_code = 5;
+            case 'NA' 
+                subject_code = 6;    
+            case 'NM' 
+                subject_code = 7;  
+            case 'TM' 
+                subject_code = 8;    
+            case 'UY' 
+                subject_code = 9; 
+            case 'YM' 
+                subject_code = 10;
+%                 otherwise
         end
         
-        peak_counter = general_counter(subject_code,emotion_code)+1;
-        general_counter(subject_code,emotion_code) = general_counter(subject_code,emotion_code)+1;
+        peak_counter = general_counter(subject_code, emotion_code) + 1;
+        general_counter(subject_code, emotion_code) = general_counter(subject_code, emotion_code) + 1;
         
         % Create image path.         
         temp = strcat(db_path, '/');
         image_path = strcat(temp, picture_name);
         % Crop only face.
-        image = detect_face(imread(image_path));        
-        matrix_faces{subject_code,emotion_code}.entire_picture(:,peak_counter) = image(:);
+        image = detect_face(imread(image_path));
+        
+        matrix_faces{subject_code, emotion_code}.entire_picture(:,peak_counter) = image(:);
     end
 end
-save generalCounter_matrixFaces.mat general_counter matrix_faces;
+save generalCounterMatrixFaces.mat general_counter matrix_faces;
 end

@@ -1,8 +1,5 @@
-% Author : Kemal Akkoyun
-% Institue : Istanbul Bilgi University
-% Id : 11076004
-% Description : A function to look through jaffe database.
 
+% Description : A function to look through jaffe database.
 function look_jaffe_images(db_path)
 
 % The database contains 213 images of 7 facial expressions.
