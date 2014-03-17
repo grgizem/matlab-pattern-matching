@@ -22,7 +22,6 @@ function read_jaffe(db_path)
 % DATABASE DEPENDENT CONSTANTS
 subject_no = 10;
 emotion_no = 7;
-% default_image_dim = 256;
 
 % Directory that contains pictures.
 directory_of_pictures = dir(db_path);
@@ -40,7 +39,8 @@ end
 number_of_images = length(actual_pictures);
 
 general_counter = zeros(subject_no, emotion_no);
-% matrix_faces = zeros(default_image_dim, default_image_dim);
+matrix_faces = cell(subject_no, emotion_no);
+
 for index=1:number_of_images
     % Example: YM.FE4.70.tiff
     picture_name = actual_pictures(index).name;
@@ -102,7 +102,8 @@ for index=1:number_of_images
         temp = strcat(db_path, '/');
         image_path = strcat(temp, picture_name);
         % Crop only face.
-        image = detect_face(imread(image_path));
+        image = imread(image_path);
+        image = detect_face(image);
         
         matrix_faces{subject_code, emotion_code}.entire_picture(:,peak_counter) = image(:);
     end
