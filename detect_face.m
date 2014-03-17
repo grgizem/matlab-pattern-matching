@@ -23,7 +23,7 @@ function [ face_image ] = detect_face(image)
     % Tighten the face region.
     x_shift_factor = bbox(3) / 100 * 11;
     bbox(1) = bbox(1) + x_shift_factor;
-    bbox(3) = bbox(3) - 2*x_shift_factor
+    bbox(3) = bbox(3) - 2*x_shift_factor;
 
     y_shift_factor = bbox(4) / 100 * 19;
     bbox(2) = bbox(2) + y_shift_factor;

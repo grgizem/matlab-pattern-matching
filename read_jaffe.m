@@ -40,6 +40,8 @@ number_of_images = length(actual_pictures);
 
 general_counter = zeros(subject_no, emotion_no);
 matrix_faces = cell(subject_no, emotion_no);
+matrix__crop_faces = cell(subject_no, emotion_no);
+
 
 for index=1:number_of_images
     % Example: YM.FE4.70.tiff
@@ -103,10 +105,12 @@ for index=1:number_of_images
         image_path = strcat(temp, picture_name);
         % Crop only face.
         image = imread(image_path);
-        image = detect_face(image);
+        face = detect_face(image);
         
         matrix_faces{subject_code, emotion_code}.entire_picture(:,peak_counter) = image(:);
+        matrix_crop_faces{subject_code, emotion_code}.crop_picture(:,peak_counter) = face(:);
     end
 end
 save generalCounterMatrixFaces.mat general_counter matrix_faces;
+save generalCounterMatrixCropFaces.mat general_counter matrix_crop_faces;
 end
