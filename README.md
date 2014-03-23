@@ -1,4 +1,7 @@
 matlab-pattern-matching
 =======================
 
-Educational Projects on Face detection
+Educational Project on Pattern Matching.
+
+
+Jaffe Database URL : http://www.kasrl.org/jaffe.html
